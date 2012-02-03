@@ -21,8 +21,10 @@ define mcollective::create_rsa_key {
 
   # First generate private key
   exec { "genprivkey":
-    command => "/usr/bin/openssl genrsa -out ${mcdir}/${name}-private.pem",
-    creates => "${mcdir}/${name}-private.pem",
+    command   => "/usr/bin/openssl genrsa -out ${mcdir}/${name}-private.pem",
+    creates   => "${mcdir}/${name}-private.pem",
+    logoutput => on_failure,
+    require   => File[$mcdir],
   }
 
   file { "${mcdir}/${name}-private.pem":
@@ -32,9 +34,26 @@ define mcollective::create_rsa_key {
     require => Exec["genprivkey"],
   }
 
+  $pubkeypath = "/etc/mcollective/pubkeys/"
+
   exec { "genpubkey":
-    command => "/usr/bin/openssl rsa -in ${mcdir}/${name}-private.pem -out ${mcdir}/${name}.pem -outform PEM -pubout",
-    creates => "${mcdir}/${name}.pem",
-    require => File["${mcdir}/${name}-private.pem"],
+    command   => "/usr/bin/openssl rsa -in ${mcdir}/${name}-private.pem -out ${pubkeypath}/${name}.pem -outform PEM -pubout",
+    creates   => "${mcdir}/${name}.pem",
+    require   => File["${mcdir}/${name}-private.pem"],
+    logoutput => on_failure,
+  }
+  file { "${pubkeypath}/${name}.pem":
+    ensure  => "present",
+    mode    => "0644",
+    owner   => "root",
+    group   => "root",
+    require => Exec["genpubkey"],
+  }
+
+  file { "${mcdir}/${name}.pem":
+    source  => "${pubkeypath}/${name}.pem",
+    mode    => 0600,
+    owner   => $name,
+    require => File["${pubkeypath}/${name}"],
   }
 }
