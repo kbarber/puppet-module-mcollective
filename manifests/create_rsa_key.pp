@@ -38,7 +38,7 @@ define mcollective::create_rsa_key {
 
   exec { "genpubkey":
     command   => "/usr/bin/openssl rsa -in ${mcdir}/${name}-private.pem -out ${pubkeypath}/${name}.pem -outform PEM -pubout",
-    creates   => "${mcdir}/${name}.pem",
+    creates   => "${pubkeypath}/${name}.pem",
     require   => File["${mcdir}/${name}-private.pem"],
     logoutput => on_failure,
   }
@@ -54,6 +54,6 @@ define mcollective::create_rsa_key {
     source  => "${pubkeypath}/${name}.pem",
     mode    => 0600,
     owner   => $name,
-    require => File["${pubkeypath}/${name}"],
+    require => File["${pubkeypath}/${name}.pem"],
   }
 }
