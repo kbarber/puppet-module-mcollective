@@ -1,0 +1,4 @@
+policy default deny
+<% userpolicy.each do |user,settings| -%>
+<%= settings["policy"] %>	cert=<%= user %>	<%= settings["actions"] ? settings["actions"].join(" ") : "*" %>	*	*
+<% end -%>

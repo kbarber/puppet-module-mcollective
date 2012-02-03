@@ -1,0 +1,9 @@
+# .gems generated gem export file. Note that any env variable settings will be missing. Append these after using a ';' field separator
+diff-lcs -v1.1.2
+mocha -v0.9.12
+rspec-core -v2.6.0
+rspec -v2.6.0
+rspec-expectations -v2.6.0
+rspec-mocks -v2.6.0
+rake -v0.8.7
+rspec-puppet -v0.1.1

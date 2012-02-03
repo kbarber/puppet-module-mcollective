@@ -1,0 +1,26 @@
+# Basic stuff
+# main_collective = mcollective
+# collectives = mcollective
+topicprefix = <%= mc_topicprefix %>
+libdir      = <%= mc_libdir %>
+loglevel    = <%= mc_loglevel %>
+logfile     = /dev/null
+
+# Plugins
+securityprovider = <%= mc_security_provider %>
+<% case mc_security_provider -%>
+<% when "psk" -%>
+plugin.psk = <%= mc_security_psk %>
+<% when "ssl" -%>
+plugin.ssl_server_public = <%= client_ssl_server_public %>
+plugin.ssl_client_private = <%= client_ssl_client_private %>
+plugin.ssl_client_public = <%= client_ssl_client_public %>
+<% end -%>
+
+# Middleware
+connector = stomp
+plugin.stomp.host     = <%= stomp_server %>
+plugin.stomp.port     = <%= stomp_port %>
+plugin.stomp.user     = <%= stomp_user %>
+plugin.stomp.password = <%= stomp_passwd %>
+

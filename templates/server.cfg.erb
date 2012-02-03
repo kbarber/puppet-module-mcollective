@@ -1,0 +1,44 @@
+# Basic stuff
+topicprefix = <%= mc_topicprefix %>
+libdir      = <%= mc_libdir %>
+logfile     = <%= mc_logfile %>
+loglevel    = <%= mc_loglevel %>
+daemonize   = <%= mc_daemonize %>
+
+# Plugins
+securityprovider = <%= mc_security_provider %>
+<% case mc_security_provider -%>
+<% when "psk" -%>
+plugin.psk = <%= mc_security_psk %>
+<% when "ssl" -%>
+plugin.ssl_server_private = <%= server_ssl_server_private %>
+plugin.ssl_server_public = <%= server_ssl_server_public %>
+plugin.ssl_client_cert_dir = <%= server_ssl_client_cert_dir %>
+<% end -%>
+
+# Registration
+registerinterval = 300
+registration = Meta
+
+# Middleware
+connector = stomp
+plugin.stomp.host     = <%= stomp_server %>
+plugin.stomp.port     = <%= stomp_port %>
+plugin.stomp.user     = <%= stomp_user %>
+plugin.stomp.password = <%= stomp_passwd %>
+
+# NRPE
+plugin.nrpe.conf_dir  = <%= nrpe_dir %>
+
+# Facts
+factsource = <%= fact_source %>
+<% if fact_source == 'yaml' -%>
+plugin.yaml = <%= yaml_facter_source %>
+<% end -%>
+
+# ActionPolicy
+rpcauthorization = 1
+rpcauthprovider = action_policy
+plugin.actionpolicy.allow_unconfigured = 0
+plugin.actoinpolicy.enable_default = 1
+plugin.actionpolicy.default_name = default
