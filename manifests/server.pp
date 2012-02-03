@@ -22,7 +22,7 @@ class mcollective::server (
   $server_config_owner = $mcollective::params::server_config_owner,
   $server_config_group = $mcollective::params::server_config_group,
   $policy_dir          = $mcollective::params::policy_dir,
-  $mc_service_name     = $mcollective::params::mc_service_name
+  $mc_service_name     = $mcollective::params::mc_service_name,
   $stomp_server        = $mcollective::params::stomp_server,
   $stomp_port          = $mcollective::params::stomp_port,
   $stomp_user          = $mcollective::params::stomp_user,
