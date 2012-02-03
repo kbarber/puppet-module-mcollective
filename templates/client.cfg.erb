@@ -1,26 +1,27 @@
 # Basic stuff
 # main_collective = mcollective
 # collectives = mcollective
-topicprefix = <%= mc_topicprefix %>
-libdir      = <%= mc_libdir %>
-loglevel    = <%= mc_loglevel %>
+topicprefix = <%= scope.lookupvar("mcollective::client::mc_topicprefix") %>
+libdir      = <%= scope.lookupvar("mcollective::client::mc_libdir") %>
+loglevel    = <%= scope.lookupvar("mcollective::client::mc_loglevel") %>
 logfile     = /dev/null
 
 # Plugins
-securityprovider = <%= mc_security_provider %>
-<% case mc_security_provider -%>
+securityprovider = <%= scope.lookupvar("mcollective::client::mc_security_provider") %>
+<% case scope.lookupvar("mcollective::client::mc_security_provider") -%>
 <% when "psk" -%>
-plugin.psk = <%= mc_security_psk %>
+plugin.psk = <%= scope.lookupvar("mcollective::client::mc_security_psk") %>
 <% when "ssl" -%>
-plugin.ssl_server_public = <%= client_ssl_server_public %>
-plugin.ssl_client_private = <%= client_ssl_client_private %>
-plugin.ssl_client_public = <%= client_ssl_client_public %>
+plugin.ssl_server_public = <%= scope.lookupvar("mcollective::client::client_ssl_server_public") %>
+plugin.ssl_client_private = <%= scope.lookupvar("mcollective::client::client_ssl_client_private") %>
+plugin.ssl_client_public = <%= scope.lookupvar("mcollective::client::client_ssl_client_public") %>
 <% end -%>
 
 # Middleware
 connector = stomp
-plugin.stomp.host     = <%= stomp_server %>
-plugin.stomp.port     = <%= stomp_port %>
-plugin.stomp.user     = <%= stomp_user %>
-plugin.stomp.password = <%= stomp_passwd %>
+plugin.stomp.host1     = <%= scope.lookupvar("mcollective::client::stomp_server") %>
+plugin.stomp.port1     = <%= scope.lookupvar("mcollective::client::stomp_port") %>
+plugin.stomp.user1     = <%= scope.lookupvar("mcollective::client::stomp_user") %>
+plugin.stomp.password1 = <%= scope.lookupvar("mcollective::client::stomp_passwd") %>
+plugin.stomp.ssl1      = <%= scope.lookupvar("mcollective::client::stomp_ssl") ? "true" : "false" %>
 

@@ -57,6 +57,7 @@ class mcollective::params {
   $stomp_passwd  = 'secret'
   $stomp_server  = 'stomp'
   $stomp_port    = '61613'
+  $stomp_ssl     = false
 
   $fact_source = 'yaml'
 

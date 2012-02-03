@@ -1,19 +1,19 @@
 # Basic stuff
-topicprefix = <%= mc_topicprefix %>
-libdir      = <%= mc_libdir %>
-logfile     = <%= mc_logfile %>
-loglevel    = <%= mc_loglevel %>
-daemonize   = <%= mc_daemonize %>
+topicprefix = <%= scope.lookupvar("mcollective::server::mc_topicprefix") %>
+libdir      = <%= scope.lookupvar("mcollective::server::mc_libdir") %>
+logfile     = <%= scope.lookupvar("mcollective::server::mc_logfile") %>
+loglevel    = <%= scope.lookupvar("mcollective::server::mc_loglevel") %>
+daemonize   = <%= scope.lookupvar("mcollective::server::mc_daemonize") %>
 
 # Plugins
-securityprovider = <%= mc_security_provider %>
-<% case mc_security_provider -%>
+securityprovider = <%= scope.lookupvar("mcollective::server::mc_security_provider") %>
+<% case scope.lookupvar("mcollective::server::mc_security_provider") -%>
 <% when "psk" -%>
-plugin.psk = <%= mc_security_psk %>
+plugin.psk = <%= scope.lookupvar("mcollective::server::mc_security_psk") %>
 <% when "ssl" -%>
-plugin.ssl_server_private = <%= server_ssl_server_private %>
-plugin.ssl_server_public = <%= server_ssl_server_public %>
-plugin.ssl_client_cert_dir = <%= server_ssl_client_cert_dir %>
+plugin.ssl_server_private = <%= scope.lookupvar("mcollective::server::server_ssl_server_private") %>
+plugin.ssl_server_public = <%= scope.lookupvar("mcollective::server::server_ssl_server_public") %>
+plugin.ssl_client_cert_dir = <%= scope.lookupvar("mcollective::server::server_ssl_client_cert_dir") %>
 <% end -%>
 
 # Registration
@@ -22,18 +22,19 @@ registration = Meta
 
 # Middleware
 connector = stomp
-plugin.stomp.host     = <%= stomp_server %>
-plugin.stomp.port     = <%= stomp_port %>
-plugin.stomp.user     = <%= stomp_user %>
-plugin.stomp.password = <%= stomp_passwd %>
+plugin.stomp.host1     = <%= scope.lookupvar("mcollective::server::stomp_server") %>
+plugin.stomp.port1     = <%= scope.lookupvar("mcollective::server::stomp_port") %>
+plugin.stomp.user1     = <%= scope.lookupvar("mcollective::server::stomp_user") %>
+plugin.stomp.password1 = <%= scope.lookupvar("mcollective::server::stomp_passwd") %>
+plugin.stomp.ssl1      = <%= scope.lookupvar("mcollective::server::stomp_ssl") ? "true" : "false" %>
 
 # NRPE
-plugin.nrpe.conf_dir  = <%= nrpe_dir %>
+plugin.nrpe.conf_dir  = <%= scope.lookupvar("mcollective::server::nrpe_dir") %>
 
 # Facts
-factsource = <%= fact_source %>
-<% if fact_source == 'yaml' -%>
-plugin.yaml = <%= yaml_facter_source %>
+factsource = <%= scope.lookupvar("mcollective::server::fact_source") %>
+<% if scope.lookupvar("mcollective::server::fact_source") == 'yaml' -%>
+plugin.yaml = <%= scope.lookupvar("mcollective::server::yaml_facter_source") %>
 <% end -%>
 
 # ActionPolicy

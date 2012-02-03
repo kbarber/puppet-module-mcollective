@@ -86,7 +86,6 @@ class mcollective(
     class { 'mcollective::server':
       package_version => $package_version,
       service_name    => $service_name,
-      config          => template('mcollective/server.cfg.erb'),
       config_file     => $server_config_file,
       require         => Anchor['mcollective::begin'],
     }
@@ -102,7 +101,6 @@ class mcollective(
   if $client {
     class { 'mcollective::client':
       package_version         => $version,
-      config          => template('mcollective/client.cfg.erb'),
       config_file     => $client_config_file,
       manage_packages => $manage_packages,
       require         => Anchor['mcollective::begin'],
