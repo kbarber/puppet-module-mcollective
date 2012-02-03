@@ -60,6 +60,7 @@ class mcollective::params {
   $stomp_ssl     = false
 
   $fact_source = 'yaml'
+  $yaml_facter_source = "/etc/mcollective/facts.yaml"
 
   $server_ssl_server_public   = '/etc/mcollective/ssl/server.pem'
   $server_ssl_server_private  = '/etc/mcollective/ssl/server-private.pem'

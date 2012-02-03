@@ -1,6 +1,7 @@
 class mcollective::server::service(
 
   $mc_service_name     = $mcollective::server::mc_service_name,
+  $yaml_facter_source  = $mcollective::server::yaml_facter_source
 
 ) {
 
@@ -12,7 +13,7 @@ class mcollective::server::service(
   }
 
   cron { "facter_cache":
-    command => "facter -y > /etc/mcollective/facts.yaml.tmp ; mv -f /etc/mcollective/facts.yaml.tmp /etc/mcollective/facts.yaml",
+    command => "/usr/bin/facter -y > ${yaml_facter_source}.tmp ; mv -f ${yaml_facter_source}.tmp ${yaml_facter_source}",
     minute => "*/15",
   }
 }
