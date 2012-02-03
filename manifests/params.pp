@@ -72,4 +72,7 @@ class mcollective::params {
   $policy_dir = '/etc/mcollective/policies/'
 
   $package_version = "installed"
+
+  $client_config_file = "/etc/mcollective/client.cfg"
+  $server_config_file = "/etc/mcollective/server.cfg"
 }

@@ -15,5 +15,9 @@ describe 'mcollective::server', :type => :class do
     it 'should always be included' do
       subject.should contain_class('mcollective::server')
     end
+
+    it 'should create a default config file' do
+      subject.should contain_file('/etc/mcollective/server.cfg')
+    end
   end
 end

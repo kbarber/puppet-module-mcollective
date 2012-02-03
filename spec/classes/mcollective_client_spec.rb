@@ -23,6 +23,10 @@ describe 'mcollective::client', :type => :class do
     it 'should always be included' do
       subject.should contain_class('mcollective::client')
     end
+
+    it 'should create a default config file' do
+      subject.should contain_file('/etc/mcollective/client.cfg')
+    end
   end
 
   describe 'when setting a parameter' do

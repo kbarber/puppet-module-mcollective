@@ -19,9 +19,10 @@ plugin.ssl_client_public = <%= scope.lookupvar("mcollective::client::client_ssl_
 
 # Middleware
 connector = stomp
-plugin.stomp.host1     = <%= scope.lookupvar("mcollective::client::stomp_server") %>
-plugin.stomp.port1     = <%= scope.lookupvar("mcollective::client::stomp_port") %>
-plugin.stomp.user1     = <%= scope.lookupvar("mcollective::client::stomp_user") %>
-plugin.stomp.password1 = <%= scope.lookupvar("mcollective::client::stomp_passwd") %>
-plugin.stomp.ssl1      = <%= scope.lookupvar("mcollective::client::stomp_ssl") ? "true" : "false" %>
+plugin.stomp.pool.size      = 1
+plugin.stomp.pool.host1     = <%= scope.lookupvar("mcollective::client::stomp_server") %>
+plugin.stomp.pool.port1     = <%= scope.lookupvar("mcollective::client::stomp_port") %>
+plugin.stomp.pool.user1     = <%= scope.lookupvar("mcollective::client::stomp_user") %>
+plugin.stomp.pool.password1 = <%= scope.lookupvar("mcollective::client::stomp_passwd") %>
+plugin.stomp.pool.ssl1      = <%= scope.lookupvar("mcollective::client::stomp_ssl") ? "true" : "false" %>
 
